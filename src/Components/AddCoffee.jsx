@@ -16,7 +16,7 @@ const handleAddCoffee = e =>{
         const newCoffee = {name, quantity, taste, details, supplier, photo,category}
         console.log(newCoffee)
   
-        fetch('http://localhost:5000/coffees',{
+        fetch('https://practise-coffee-store-server.vercel.app/coffees',{
             method:'POST',
             headers: {
               'content-type': 'application/json'

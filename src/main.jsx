@@ -8,13 +8,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import AddCoffee from './Components/AddCoffee.jsx';
+import Login from './Components/Login.jsx';
+import SignUp from './Components/SignUp.jsx';
 import UpdateCoffee from './Components/UpdateCoffee.jsx';
+import Users from './Components/Users.jsx';
+import AuthProvider from './Providers/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
-    loader: () => fetch('http://localhost:5000/coffees')
+    loader: () => fetch('https://practise-coffee-store-server.vercel.app/coffees')
   },
   {
     path: '/addCoffee',
@@ -23,13 +27,29 @@ const router = createBrowserRouter([
   {
     path:'/updateCoffee/:id',
     element: <UpdateCoffee></UpdateCoffee>,
-    loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`)
+    loader: ({params}) => fetch(`https://practise-coffee-store-server.vercel.app/coffees/${params.id}`)
+    
+  },
+  {
+    path:"/register",
+    element:<SignUp></SignUp>
+  },
+  {
+    path: '/login',
+    element:<Login></Login>
+  },
+  {
+    path: '/users',
+    element: <Users></Users>,
+    loader: () => fetch('https://practise-coffee-store-server.vercel.app/users')
     
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-   <RouterProvider router={router} />
+  <AuthProvider>
+  <RouterProvider router={router} />
+  </AuthProvider>
   </React.StrictMode>,
 )
